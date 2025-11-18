@@ -10,9 +10,9 @@
         <module name="JavaSE" />
         <module name="Redis" />
         <module name="validatorChain" />
-        <module name="spring_cases" />
-        <module name="ip_spring_boot_starter" />
         <module name="RabbitMQ" />
+        <module name="ip_spring_boot_starter" />
+        <module name="spring_cases" />
         <module name="Proxy" />
         <module name="typeHandler" />
         <module name="Elasticsearch" />
@@ -28,9 +28,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
-          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
-          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
         </processorPath>
         <module name="mapstruct" />
         <module name="inventoryOverselling" />
