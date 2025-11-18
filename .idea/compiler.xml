@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="JavaSE" />
+        <module name="Redis" />
+        <module name="validatorChain" />
+        <module name="spring_cases" />
+        <module name="ip_spring_boot_starter" />
+        <module name="RabbitMQ" />
+        <module name="Proxy" />
+        <module name="typeHandler" />
+        <module name="Elasticsearch" />
+        <module name="ThreadLocal" />
+        <module name="JUC" />
+        <module name="EasyExcel" />
+        <module name="MyBatisPlus" />
+        <module name="ShardingSphere" />
+        <module name="sa-token" />
+      </profile>
+      <profile name="Annotation profile for blogCases" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+        </processorPath>
+        <module name="mapstruct" />
+        <module name="inventoryOverselling" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Redis" options="" />
+      <module name="Spring" options="" />
+      <module name="ip_spring_boot_starter" options="-parameters" />
+      <module name="spring_cases" options="" />
+    </option>
+  </component>
+</project>

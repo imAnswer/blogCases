@@ -1,0 +1,16 @@
+spring:
+  rabbitmq:
+    host: 192.168.64.132
+    port: 15672
+    username: admin
+    password: 123
+    publisher-confirm-type: correlated   # 发布确认
+    publisher-returns: true              # 不可路由返回
+    template:
+      mandatory: true
+  redis:
+    host: 192.168.64.132
+    port: 6379
+
+cache:
+  delay-ms: 350   # 第二次删除延迟（按你的回源/复制P99调整）

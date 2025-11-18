@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mybatis_plus?useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: mybatis_plus
+    username: root
+    password: lsy152432
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # 配置类型别名所对应的包
+  type-aliases-package: org.example.pojo
+  # 扫描通用枚举的包
+  type-enums-package: org.example.enums

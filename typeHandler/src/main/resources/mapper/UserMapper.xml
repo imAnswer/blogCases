@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.mapper.UserMapper">
+
+    <!-- 通用结果映射，在这里写用于加密的typeHandler -->
+    <resultMap id="BaseResultMap" type="org.example.entity.User">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="phone" property="phone" />
+        <result column="password" property="password" typeHandler="org.example.AesEncryptTypeHandler"/>
+    </resultMap>
+
+
+    <!-- 插入用户 -->
+    <insert id="saveUser" parameterType="org.example.entity.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (id, name, phone, password)
+        VALUES (#{id}, #{name}, #{phone}, #{password, jdbcType=VARCHAR,
+                typeHandler=org.example.AesEncryptTypeHandler})
+    </insert>
+
+    <!-- 查询用户 -->
+    <select id="getUser" resultMap="BaseResultMap">
+        select * from user where id=#{id}
+    </select>
+
+</mapper>
