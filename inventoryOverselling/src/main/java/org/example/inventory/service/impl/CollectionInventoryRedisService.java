@@ -58,8 +58,8 @@ public class CollectionInventoryRedisService implements InventoryService {
 
     @Override
     public Integer getInventory(InventoryRequest request) {
-        Integer stock = (Integer) redissonClient.getBucket(getCacheKey(request), StringCodec.INSTANCE).get();
-        return stock;
+        String value = (String) redissonClient.getBucket(getCacheKey(request), StringCodec.INSTANCE).get();
+        return Integer.valueOf(value);
     }
 
     @Override
