@@ -244,7 +244,16 @@ public class CollectionInventoryRedisService implements InventoryService {
 
     @Override
     public Long removeInventoryDecreaseLog(InventoryRequest request) {
-        return 0l;
+        String luaScript = """
+                local jsonString = redis.call('hdel', KEYS[1], ARGV[1])
+                return jsonString
+                """;
+
+        Long stream = redissonClient.getScript().eval(RScript.Mode.READ_WRITE,
+                luaScript,
+                RScript.ReturnType.INTEGER,
+                Arrays.asList(getCacheStreamKey(request)), "DECREASE_" + request.getIdentifier());
+        return stream;
     }
 
     protected String getCacheKey(InventoryRequest request) {

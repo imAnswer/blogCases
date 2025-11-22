@@ -30,7 +30,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 基于SpringEvent+XXL-JOB实现订单确认自动推进
+ * 基于SpringEvent+InventoryHint实现订单确认自动推进
  * @author liushaoya
  * @since 2025-11-14 16:02
  */
@@ -75,6 +75,7 @@ public class TradeController {
         //创建订单
         OrderCreateRequest orderCreateRequest = new OrderCreateRequest();
         orderCreateRequest.setOrderId(orderId);
+        //这里的幂等号应该是根据TreadLocal传递过来的，为了实现方便，采用mock的方式写入
         orderCreateRequest.setIdentifier("123456");
         orderCreateRequest.setBuyerId(userId);
         orderCreateRequest.setGoodsId(buyParam.getGoodsId());
