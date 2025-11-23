@@ -5,6 +5,7 @@ import org.example.inventory.response.InventoryCheckResponse;
 import org.example.inventory.service.GoodsFacadeService;
 import org.example.inventory.service.InventoryCheckFacadeService;
 import org.example.inventory.vo.GoodsStreamVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class InventoryCheckFacadeServiceImpl implements InventoryCheckFacadeService {
 
+    @Autowired
     private GoodsFacadeService goodsFacadeService;
 
     @Override

@@ -33,6 +33,15 @@ public class TurboKeyShardingAlgorithm implements ComplexKeysShardingAlgorithm<S
         this.props = props;
     }
 
+    /**
+     *
+     * @param availableTargetNames 可用目标表名（如trade_order_001,trade_order_002,trade_order_003）
+     * @param complexKeysShardingValue 其中包含三个属性：
+     * logicTableName：分表逻辑表名(如trade_order)
+     * columnNameAndShardingValuesMap。分表字段和精准分片的值（如：=、IN）
+     * columnNameAndRangeValuesMap。分表字段和范围条件的值（如：>、<、BETWEEN等）
+     * @return
+     */
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, ComplexKeysShardingValue<String> complexKeysShardingValue) {
         Collection<String> result = new HashSet<>();
@@ -43,6 +52,7 @@ public class TurboKeyShardingAlgorithm implements ComplexKeysShardingAlgorithm<S
 
         if (CollectionUtils.isNotEmpty(mainColums)) {
             for (String colum : mainColums) {
+                //分表逻辑
                 String shardingTarget = calculateShardingTarget(colum);
                 result.add(shardingTarget);
             }

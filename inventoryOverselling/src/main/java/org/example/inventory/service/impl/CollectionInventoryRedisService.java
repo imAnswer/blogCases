@@ -182,7 +182,7 @@ public class CollectionInventoryRedisService implements InventoryService {
                 """;
 
         try {
-            Integer result = ((Long) redissonClient.getScript().eval(RScript.Mode.READ_WRITE,
+            Integer result = ((Long) redissonClient.getScript(StringCodec.INSTANCE).eval(RScript.Mode.READ_WRITE,
                     luaScript,
                     RScript.ReturnType.INTEGER,
                     Arrays.asList(getCacheKey(request), getCacheStreamKey(request)),
@@ -249,7 +249,7 @@ public class CollectionInventoryRedisService implements InventoryService {
                 return jsonString
                 """;
 
-        Long stream = redissonClient.getScript().eval(RScript.Mode.READ_WRITE,
+        Long stream = redissonClient.getScript(StringCodec.INSTANCE).eval(RScript.Mode.READ_WRITE,
                 luaScript,
                 RScript.ReturnType.INTEGER,
                 Arrays.asList(getCacheStreamKey(request)), "DECREASE_" + request.getIdentifier());
