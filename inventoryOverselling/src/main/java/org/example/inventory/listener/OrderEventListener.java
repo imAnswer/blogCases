@@ -1,5 +1,6 @@
 package org.example.inventory.listener;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.inventory.constant.UserType;
 import org.example.inventory.entity.TradeOrder;
 import org.example.inventory.event.OrderCreateEvent;
@@ -17,6 +18,7 @@ import java.util.Date;
  * @since 2025-11-14 19:47
  */
 @Component
+@Slf4j
 public class OrderEventListener {
 
     @Autowired
@@ -27,7 +29,7 @@ public class OrderEventListener {
     // 因为在后面的压测中发现，异步处理会导致整体的订单CONFIRM延迟变长，影响用户体验，所以改为同步调用的方式，详见压测部分视频。
     @TransactionalEventListener(value = OrderCreateEvent.class)
     public void onApplicationEvent(OrderCreateEvent event) {
-
+        log.info("收到事件: {}, 线程: {}", event, Thread.currentThread().getName());
         TradeOrder tradeOrder = (TradeOrder) event.getSource();
         OrderConfirmRequest confirmRequest = new OrderConfirmRequest();
         confirmRequest.setOperator(UserType.PLATFORM.name());
@@ -40,5 +42,6 @@ public class OrderEventListener {
         confirmRequest.setGoodsType(tradeOrder.getGoodsType());
         confirmRequest.setGoodsId(tradeOrder.getGoodsId());
         orderFacadeService.confirm(confirmRequest);
+        log.info("订单确认成功: {}, 线程: {}", tradeOrder.getOrderId(), Thread.currentThread().getName());
     }
 }

@@ -37,6 +37,7 @@ public class InventoryFacadeServiceImpl implements InventoryFacadeService {
     @Override
     public SingleResponse<Boolean> decrease(InventoryRequest inventoryRequest) {
 
+        //执行lua脚本，redis库存扣减以及redis流水插入
         InventoryResponse inventoryResponse = collectionInventoryRedisService.decrease(inventoryRequest);
 
         if (!inventoryResponse.getSuccess()) {

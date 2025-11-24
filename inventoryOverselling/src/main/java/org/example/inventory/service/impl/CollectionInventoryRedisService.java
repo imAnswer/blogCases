@@ -58,8 +58,8 @@ public class CollectionInventoryRedisService implements InventoryService {
 
     @Override
     public Integer getInventory(InventoryRequest request) {
-        Integer stock = (Integer) redissonClient.getBucket(getCacheKey(request), StringCodec.INSTANCE).get();
-        return stock;
+        String value = (String) redissonClient.getBucket(getCacheKey(request), StringCodec.INSTANCE).get();
+        return Integer.valueOf(value);
     }
 
     @Override
@@ -182,7 +182,7 @@ public class CollectionInventoryRedisService implements InventoryService {
                 """;
 
         try {
-            Integer result = ((Long) redissonClient.getScript().eval(RScript.Mode.READ_WRITE,
+            Integer result = ((Long) redissonClient.getScript(StringCodec.INSTANCE).eval(RScript.Mode.READ_WRITE,
                     luaScript,
                     RScript.ReturnType.INTEGER,
                     Arrays.asList(getCacheKey(request), getCacheStreamKey(request)),
@@ -244,7 +244,16 @@ public class CollectionInventoryRedisService implements InventoryService {
 
     @Override
     public Long removeInventoryDecreaseLog(InventoryRequest request) {
-        return 0l;
+        String luaScript = """
+                local jsonString = redis.call('hdel', KEYS[1], ARGV[1])
+                return jsonString
+                """;
+
+        Long stream = redissonClient.getScript(StringCodec.INSTANCE).eval(RScript.Mode.READ_WRITE,
+                luaScript,
+                RScript.ReturnType.INTEGER,
+                Arrays.asList(getCacheStreamKey(request)), "DECREASE_" + request.getIdentifier());
+        return stream;
     }
 
     protected String getCacheKey(InventoryRequest request) {

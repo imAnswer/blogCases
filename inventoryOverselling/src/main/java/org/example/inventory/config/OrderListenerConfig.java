@@ -14,6 +14,11 @@ import java.util.concurrent.*;
 @Configuration
 @EnableAsync
 public class OrderListenerConfig {
+
+    /**
+     * 定义线程池来处理异步事件
+     * @return
+     */
     @Bean
     public Executor orderListenExecutor() {
 

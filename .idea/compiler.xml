@@ -28,20 +28,48 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
         </processorPath>
         <module name="mapstruct" />
+      </profile>
+      <profile name="Annotation profile for inventoryOverselling" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../JavaEnv/maven/repository/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+        </processorPath>
         <module name="inventoryOverselling" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Redis" options="" />
+      <module name="EasyExcel" options="-parameters" />
+      <module name="Elasticsearch" options="-parameters" />
+      <module name="JUC" options="-parameters" />
+      <module name="JavaSE" options="-parameters" />
+      <module name="MyBatisPlus" options="-parameters" />
+      <module name="Proxy" options="-parameters" />
+      <module name="RabbitMQ" options="-parameters" />
+      <module name="Redis" options="-parameters" />
       <module name="Spring" options="" />
+      <module name="ThreadLocal" options="-parameters" />
+      <module name="blogCases" options="-parameters" />
+      <module name="inventoryOverselling" options="-parameters" />
       <module name="ip_spring_boot_starter" options="-parameters" />
+      <module name="mapstruct" options="-parameters" />
+      <module name="sa-token" options="-parameters" />
       <module name="spring_cases" options="" />
+      <module name="typeHandler" options="-parameters" />
+      <module name="validatorChain" options="-parameters" />
     </option>
   </component>
 </project>

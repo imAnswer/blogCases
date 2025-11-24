@@ -33,6 +33,7 @@ public class OrderFacadeServiceImpl implements OrderFacadeService {
     public OrderResponse create(OrderCreateRequest request) {
 
         InventoryRequest inventoryRequest = new InventoryRequest(request);
+        //对redis进行操作
         SingleResponse<Boolean> decreaseResult = inventoryFacadeService.decrease(inventoryRequest);
 
         if (decreaseResult.getSuccess()) {

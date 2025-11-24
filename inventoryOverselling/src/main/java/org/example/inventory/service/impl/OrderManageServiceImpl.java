@@ -59,8 +59,9 @@ public class OrderManageServiceImpl implements OrderManageService {
 
         TradeOrder tradeOrder = doCreate(request);
 
-        //创建一个SpringEvent时间实现异步调用
+        //创建一个SpringEvent事件实现异步调用
         applicationContext.publishEvent(new OrderCreateEvent(tradeOrder));
+        log.info("事件已发布, 线程: {}", Thread.currentThread().getName());
         return new OrderResponse.OrderResponseBuilder().orderId(tradeOrder.getOrderId()).buildSuccess();
     }
 
@@ -71,9 +72,9 @@ public class OrderManageServiceImpl implements OrderManageService {
 
     private TradeOrder doCreate(OrderCreateRequest request) {
         TradeOrder tradeOrder = TradeOrder.createOrder(request);
-
+        //向订单表中插入订单记录，并且订单状态倍设置为CREATE
         orderMapper.insert(tradeOrder);
-
+        //向流水表中插入order_state为create的流水
         TradeOrderStream orderStream = new TradeOrderStream(tradeOrder, request.getOrderEvent(), request.getIdentifier());
         orderStreamMapper.insert(orderStream);
         return tradeOrder;
