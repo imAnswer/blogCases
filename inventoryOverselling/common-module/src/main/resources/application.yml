@@ -1,0 +1,67 @@
+spring:
+  data:
+    redis:
+      host: 192.168.64.132
+      port: 6379
+      ssl:
+        enabled: false
+#  datasource:
+#    driver: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://192.168.64.132:3306/nfturbo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+#    username: root
+#    password: lsy152432
+  shardingsphere:
+    datasource:
+      names: ds
+      ds:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.64.132:3306/nfturbo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+        username: root
+        password: lsy152432
+    rules:
+      sharding:
+        tables:
+          trade_order:
+            actual-data-nodes: ds.trade_order_000${0..3}
+            keyGenerateStrategy:
+              column: id
+              keyGeneratorName: snowflake
+            table-strategy:
+              complex:
+                shardingColumns: buyer_id,order_id
+                shardingAlgorithmName: trade-order-sharding
+          trade_order_stream:
+            actual-data-nodes: ds.trade_order_stream_000${0..3}
+            keyGenerateStrategy:
+              column: id
+              keyGeneratorName: snowflake
+            table-strategy:
+              complex:
+                shardingColumns: buyer_id,order_id
+                shardingAlgorithmName: trade-order-sharding
+        shardingAlgorithms:
+          #          t-order-inline:
+          #            type: INLINE
+          #            props:
+          #              algorithm-expression: trade_order_0${Math.abs(buyer_id.hashCode()) % 4}
+          trade-order-sharding:
+            type: CLASS_BASED
+            props:
+              algorithmClassName: org.example.inventory.sharding.TurboKeyShardingAlgorithm
+              strategy: complex
+              tableCount: 4
+              mainColum: buyer_id
+        keyGenerators:
+          snowflake:
+            type: SNOWFLAKE
+        auditors:
+          sharding_key_required_auditor:
+            type: DML_SHARDING_CONDITIONS
+  cloud:
+    stream:
+      rocketmq:
+        binding:
+mybatis-plus:
+  configuration:
+    use-actual-param-name: true

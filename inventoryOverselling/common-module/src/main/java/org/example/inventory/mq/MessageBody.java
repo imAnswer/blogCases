@@ -1,0 +1,17 @@
+package org.example.inventory.mq;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
+public class MessageBody {
+    /**
+     * 幂等号
+     */
+    private String identifier;
+    /**
+     * 消息体
+     */
+    private String body;
+}
