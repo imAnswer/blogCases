@@ -23,16 +23,6 @@
         <module name="ShardingSphere" />
         <module name="sa-token" />
       </profile>
-      <profile name="Annotation profile for inventoryOverselling" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
-        </processorPath>
-        <module name="inventoryOverselling" />
-      </profile>
       <profile name="Annotation profile for blogCases" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -40,10 +30,11 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
         </processorPath>
+        <module name="order-module" />
+        <module name="trade-module" />
         <module name="mapstruct" />
+        <module name="common-module" />
       </profile>
     </annotationProcessing>
   </component>
@@ -60,11 +51,14 @@
       <module name="Spring" options="" />
       <module name="ThreadLocal" options="-parameters" />
       <module name="blogCases" options="-parameters" />
+      <module name="common-module" options="-parameters" />
       <module name="inventoryOverselling" options="-parameters" />
       <module name="ip_spring_boot_starter" options="-parameters" />
       <module name="mapstruct" options="-parameters" />
+      <module name="order-module" options="-parameters" />
       <module name="sa-token" options="-parameters" />
       <module name="spring_cases" options="" />
+      <module name="trade-module" options="-parameters" />
       <module name="typeHandler" options="-parameters" />
       <module name="validatorChain" options="-parameters" />
     </option>
