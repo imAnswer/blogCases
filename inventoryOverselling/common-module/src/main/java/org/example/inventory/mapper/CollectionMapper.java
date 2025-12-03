@@ -23,4 +23,13 @@ public interface CollectionMapper extends BaseMapper<Collection> {
      */
     int sale(Long id, Integer quantity);
 
+    /**
+     * 库存退回
+     *
+     * @param id
+     * @param quantity
+     * @return
+     */
+    int cancel(Long id, Integer quantity);
+
 }

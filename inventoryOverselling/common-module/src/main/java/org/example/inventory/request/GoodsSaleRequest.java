@@ -3,6 +3,7 @@ package org.example.inventory.request;
 import lombok.*;
 import org.example.inventory.constant.GoodsEvent;
 import org.example.inventory.constant.GoodsSaleBizType;
+import org.example.inventory.vo.TradeOrderVO;
 
 import java.math.BigDecimal;
 
@@ -58,6 +59,14 @@ public class GoodsSaleRequest extends BaseGoodsRequest {
     @Override
     public GoodsEvent getEventType() {
         return GoodsEvent.SALE;
+    }
+
+    public GoodsSaleRequest(TradeOrderVO tradeOrderVO) {
+        this.setBizNo(tradeOrderVO.getOrderId());
+        this.setIdentifier(tradeOrderVO.getOrderId());
+        this.setQuantity(tradeOrderVO.getItemCount());
+        this.setGoodsType(tradeOrderVO.getGoodsType().name());
+        this.setGoodsId(Long.valueOf(tradeOrderVO.getGoodsId()));
     }
 
 }

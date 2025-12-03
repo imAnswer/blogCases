@@ -1,2 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  cn.itcast.autoconfig.IpAutoConfiguration
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#  cn.itcast.autoconfig.IpAutoConfiguration

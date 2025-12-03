@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
+ * 属性字段自动填充逻辑
  * @author liushaoya
  * @since 2025-11-22 15:29
  */

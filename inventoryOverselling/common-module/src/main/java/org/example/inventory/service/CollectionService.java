@@ -1,5 +1,6 @@
 package org.example.inventory.service;
 
+import org.example.inventory.request.GoodsCancelSaleRequest;
 import org.example.inventory.request.GoodsTrySaleRequest;
 
 /**
@@ -13,5 +14,13 @@ public interface CollectionService {
      * @param request
      * @return
      */
-    public Boolean sale(GoodsTrySaleRequest request);
+    Boolean sale(GoodsTrySaleRequest request);
+
+    /**
+     * 取消
+     *
+     * @param request
+     * @return
+     */
+    Boolean cancel(GoodsCancelSaleRequest request);
 }

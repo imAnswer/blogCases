@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: order-module
   data:
     redis:
       host: 192.168.64.132
@@ -49,8 +51,29 @@ spring:
         auditors:
           sharding_key_required_auditor:
             type: DML_SHARDING_CONDITIONS
-mybatis-plus:
-  configuration:
-    use-actual-param-name: true
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.64.132:9876
+        bindings:
+          orderClose-out-0:
+            producer:
+              producerType: Trans
+              transactionListener: orderCloseTransactionListener
+      bindings:
+        orderClose-out-0:
+          content-type: application/json
+          destination: order-close-topic
+          group: order-group
+          binder: rocketmq
+
 server:
-  port: 9082
+  port: 9081
+
+rocketmq:
+  consumer:
+    group: trade-group
+    # 一次拉取消息最大值，注意是拉取消息的最大值而非消费最大值
+    pull-batch-size: 64
+    consume-message-batch-max-size: 32

@@ -14,7 +14,7 @@ public interface InventoryFacadeService {
      * @param inventoryRequest
      * @return
      */
-    public SingleResponse<Integer> queryInventory(InventoryRequest inventoryRequest);
+    SingleResponse<Integer> queryInventory(InventoryRequest inventoryRequest);
 
     /**
      * 库存扣减
@@ -22,7 +22,7 @@ public interface InventoryFacadeService {
      * @param inventoryRequest
      * @return
      */
-    public SingleResponse<Boolean> decrease(InventoryRequest inventoryRequest);
+    SingleResponse<Boolean> decrease(InventoryRequest inventoryRequest);
 
     /**
      * 移除流水
@@ -30,5 +30,13 @@ public interface InventoryFacadeService {
      * @param inventoryRequest
      * @return
      */
-    public SingleResponse<Long> removeInventoryDecreaseLog(InventoryRequest inventoryRequest);
+    SingleResponse<Long> removeInventoryDecreaseLog(InventoryRequest inventoryRequest);
+
+    /**
+     * 库存增加
+     *
+     * @param inventoryRequest
+     * @return
+     */
+    SingleResponse<Boolean> increase(InventoryRequest inventoryRequest);
 }

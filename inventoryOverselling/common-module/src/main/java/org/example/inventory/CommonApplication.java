@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2025-10-29 9:46
  */
 @SpringBootApplication
-public class InventoryOversellingApplication {
+public class CommonApplication {
     public static void main(String[] args) {
-        SpringApplication.run(InventoryOversellingApplication.class, args);
+        SpringApplication.run(CommonApplication.class, args);
     }
 }

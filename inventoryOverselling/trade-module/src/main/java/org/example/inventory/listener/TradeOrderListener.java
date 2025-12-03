@@ -4,7 +4,6 @@ import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.example.inventory.constant.TradeOrderEvent;
 import org.example.inventory.constant.TradeOrderState;
-import org.example.inventory.exception.TradeErrorCode;
 import org.example.inventory.exception.TradeException;
 import org.example.inventory.mq.MessageBody;
 import org.example.inventory.request.*;
