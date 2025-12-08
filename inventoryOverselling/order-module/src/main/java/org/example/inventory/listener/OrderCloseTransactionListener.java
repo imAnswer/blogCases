@@ -15,9 +15,9 @@ import org.example.inventory.request.OrderTimeoutRequest;
 import org.example.inventory.response.OrderResponse;
 import org.example.inventory.service.OrderManageService;
 import org.example.inventory.service.OrderReadService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -26,10 +26,10 @@ import java.util.Map;
 @Slf4j
 @Component
 public class OrderCloseTransactionListener implements TransactionListener {
-    @Autowired
+    @Resource
     private OrderManageService orderManageService;
 
-    @Autowired
+    @Resource
     private OrderReadService orderReadService;
 
     /**
