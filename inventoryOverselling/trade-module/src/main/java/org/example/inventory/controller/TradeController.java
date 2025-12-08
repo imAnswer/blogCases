@@ -5,11 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.inventory.constant.BusinessCode;
 import org.example.inventory.constant.GoodsEvent;
 import org.example.inventory.constant.GoodsType;
-import org.example.inventory.constant.UserType;
 import org.example.inventory.idUtil.DistributeID;
 import org.example.inventory.idUtil.WorkerIdHolder;
 import org.example.inventory.param.BuyParam;
-import org.example.inventory.request.*;
+import org.example.inventory.request.InventoryCheckRequest;
+import org.example.inventory.request.InventoryRequest;
+import org.example.inventory.request.OrderCreateRequest;
 import org.example.inventory.response.InventoryCheckResponse;
 import org.example.inventory.response.OrderResponse;
 import org.example.inventory.service.GoodsFacadeService;
@@ -19,12 +20,10 @@ import org.example.inventory.service.OrderFacadeService;
 import org.example.inventory.vo.BaseGoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
@@ -46,11 +45,11 @@ public class TradeController {
     @Autowired
     private GoodsFacadeService goodsFacadeService;
     @Autowired
-    private OrderFacadeService orderFacadeService;
-    @Autowired
     private InventoryCheckFacadeService inventoryCheckFacadeService;
     @Autowired
     private InventoryFacadeService inventoryFacadeService;
+    @Autowired
+    private OrderFacadeService orderFacadeService;
 
     @PostMapping("/buy")
     public String buy(@Valid BuyParam buyParam) {
@@ -120,33 +119,6 @@ public class TradeController {
             //核验失败打印日志，不影响主流程，等异步任务再核对
             log.error("inventoryBypassVerify failed,", e);
         }
-    }
-
-    /**
-     * 取消订单
-     *
-     * @param
-     * @return 是否成功
-     */
-    @PostMapping("/cancel")
-    public Boolean cancel(@Valid @RequestBody CancelParam cancelParam) {
-        String userId = "29";
-
-        OrderCancelRequest orderCancelRequest = new OrderCancelRequest();
-        //因为每个订单只会被关闭一次，因此使用订单号作为幂等号
-        orderCancelRequest.setIdentifier(cancelParam.getOrderId());
-        orderCancelRequest.setOperateTime(new Date());
-        orderCancelRequest.setOrderId(cancelParam.getOrderId());
-        orderCancelRequest.setOperator(userId);
-        orderCancelRequest.setOperatorType(UserType.CUSTOMER);
-
-        OrderResponse orderResponse = orderFacadeService.cancel(orderCancelRequest);
-
-        if (orderResponse.getSuccess()) {
-            return true;
-        }
-
-        return false;
     }
 
 }
