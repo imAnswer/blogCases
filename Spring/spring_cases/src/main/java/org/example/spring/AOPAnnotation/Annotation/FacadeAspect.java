@@ -39,8 +39,8 @@ public class FacadeAspect {
             try {
                 BeanValidator.validateObject(parameter);
             } catch (ValidationException e) {
-
                 log.error("参数校验失败：{}", e.getMessage());
+                return "错误1";
             }
         }
 

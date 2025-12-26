@@ -83,6 +83,7 @@ public class TradeOrderListener {
             }
 
             GoodsSaleRequest goodsSaleRequest = new GoodsSaleRequest(tradeOrderVO);
+            //数据库库存退还
             GoodsSaleResponse cancelSaleResult = goodsFacadeService.cancelSale(goodsSaleRequest);
             if (!cancelSaleResult.getSuccess()) {
                 log.error("cancelSale failed,orderCloseRequest:{} , collectionSaleResponse : {}", JSON.toJSONString(orderUpdateRequest), JSON.toJSONString(cancelSaleResult));
@@ -90,6 +91,7 @@ public class TradeOrderListener {
             }
 
             InventoryRequest collectionInventoryRequest = new InventoryRequest(tradeOrderVO);
+            //redis缓存退还
             SingleResponse<Boolean> decreaseResponse = inventoryFacadeService.increase(collectionInventoryRequest);
             if (decreaseResponse.getSuccess()) {
                 log.info("increase success,collectionInventoryRequest:{}", collectionInventoryRequest);
