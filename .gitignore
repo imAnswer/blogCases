@@ -15,6 +15,9 @@ target/
 .DS_Store
 Thumbs.db
 
+# ==== 测试文件 ====
+**/src/test/**
+
 #其它文件
 compiler.xml
 jarRepositories.xml
