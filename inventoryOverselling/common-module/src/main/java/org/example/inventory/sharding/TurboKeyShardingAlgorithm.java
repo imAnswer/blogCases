@@ -48,8 +48,11 @@ public class TurboKeyShardingAlgorithm implements ComplexKeysShardingAlgorithm<S
 
         String mainColum = props.getProperty(PROP_MAIN_COLUM);
         // 获取分片键的值
+        //比如SQL是：SELECT * FROM t_order WHERE tenant_id = 1001 AND user_id = 9; 则值为mainColums = [1001]
+        //SQL是：SELECT * FROM t_order WHERE tenant_id IN (1001, 1002); 则值为mainColums = [1001, 1002]
         Collection<String> mainColums = complexKeysShardingValue.getColumnNameAndShardingValuesMap().get(mainColum);
 
+        //如果SQL中存在主分片值：
         if (CollectionUtils.isNotEmpty(mainColums)) {
             for (String colum : mainColums) {
                 //分表逻辑
@@ -60,6 +63,7 @@ public class TurboKeyShardingAlgorithm implements ComplexKeysShardingAlgorithm<S
         }
 
         complexKeysShardingValue.getColumnNameAndShardingValuesMap().remove(mainColum);
+        //如果SQL中不存在主分片值，则执行以下逻辑来避免全库全表查询
         Collection<String> otherColums = complexKeysShardingValue.getColumnNameAndShardingValuesMap().keySet();
         if (CollectionUtils.isNotEmpty(otherColums)) {
             for (String colum : otherColums) {
